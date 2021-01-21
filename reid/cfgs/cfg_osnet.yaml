@@ -1,0 +1,33 @@
+model:
+  name: 'osnet_x1_0_ms23_a0d1'
+  pretrained: True
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['dukemtmcreid']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'color_jitter']
+  save_dir: 'output/osnet_x1_0_ms23_a0d1/market2duke'
+
+train:
+  optim: 'sgd'
+  lr: 0.05
+  max_epoch: 60
+  batch_size: 32
+  lr_scheduler: 'single_step'
+  stepsize: [20]
+  weight_decay: 1e-5
+  staged_lr: True
+  new_layers: ['classifier']
+  base_lr_mult: 0.2
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 5
+  rerank: False

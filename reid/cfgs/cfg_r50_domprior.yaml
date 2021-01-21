@@ -1,0 +1,37 @@
+model:
+  name: 'resnet50_fc512_ms12_a0d1_domprior'
+  pretrained: True
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['dukemtmcreid']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'color_jitter']
+  save_dir: 'output/resnet50_fc512_ms12_a0d1_domprior/market2duke'
+
+sampler:
+  train_sampler: 'RandomDomainSampler'
+  num_cams: 2
+
+train:
+  optim: 'sgd'
+  lr: 0.05
+  max_epoch: 180
+  batch_size: 32
+  lr_scheduler: 'single_step'
+  stepsize: [60]
+  weight_decay: 1e-5
+  staged_lr: True
+  new_layers: ['fc', 'classifier']
+  base_lr_mult: 0.2
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 5
+  rerank: False
