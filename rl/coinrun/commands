@@ -1,0 +1,14 @@
+ORIGINAL: python -m coinrun.train_agent --run-id myrun --num-levels 500
+
+# 03/18:
+RCALL_NUM_GPU=4 mpiexec -n 4 python3 -m coinrun.train_agent --run-id plain0 --save-interval 1 --num-levels 500
+
+# 03/19:
+RCALL_NUM_GPU=4 mpiexec -n 8 python3 -m coinrun.train_agent --run-id plain --save-interval 1 --num-levels 500 --test
+RCALL_NUM_GPU=4 mpiexec -n 8 python3 -m coinrun.train_agent --run-id beta_e-5 --save-interval 1 --num-levels 500 --beta 0.00001 --test
+RCALL_NUM_GPU=4 mpiexec -n 8 python3 -m coinrun.train_agent --run-id beta_3e-5 --save-interval 1 --num-levels 500 --beta 0.00003 --test
+
+
+WITH TESTS?
+
+python3 -m coinrun.train_agent --run-id test1 --save-interval 100 --num-levels 500 --beta 1
