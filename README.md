@@ -4,11 +4,10 @@ This repo contains the code of our ICLR'21 paper, "Domain Generalization with Mi
 
 The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
-The full code containing the experiments on image classification, person re-ID and RL will be released soon.
+**A brief introduction**: The key idea of MixStyle is to probablistically mix instance-level feature statistics of training samples across source domains. This idea is mainly inspired by neural style transfer where the feature statistics of a content image are replaced by those of a style image for image style transfer. MixStyle implicitly increases the diversity of source domains and thus makes CNNs more robust to unseen domains with domain shift.
 
-For your convenience, we explain the implementation of MixStyle in PyTorch below so you can try it on your own models first.
+MixStyle is very easy to implement. Below we show the PyTorch code of MixStyle.
 
-Here is the code snippet of MixStyle:
 ```python
 import random
 import torch
@@ -81,3 +80,5 @@ def forward(self, x):
     x = self.res4(x) # 4th residual block
     ...
 ```
+
+In our paper, we have demonstrated the effectiveness of MixStyle on three tasks: image classification, person re-identification and reinforcement learning. The code for reproducing the experiments on these three tasks can be found in `mixstyle-release/imcls`, `mixstyle-release/reid`, and `mixstyle-release/rl`, respectively.
