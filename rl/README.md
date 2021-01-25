@@ -66,6 +66,8 @@ Note that
 
 You can download the trained models and the corresponding log files used in our paper from this [google drive link](https://drive.google.com/drive/folders/1NeoGgLMtU_a3sflKqYI00bT81473BXTP?usp=sharing).
 
+If you are looking for the tensorflow implementation of MixStyle, please refer to [this code](https://github.com/KaiyangZhou/mixstyle-release/blob/master/rl/coinrun/policies.py#L11).
+
 ## How to plot
 
 The plotting function is implemented in `plots.py`.
