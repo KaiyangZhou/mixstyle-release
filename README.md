@@ -82,3 +82,14 @@ def forward(self, x):
 ```
 
 In our paper, we have demonstrated the effectiveness of MixStyle on three tasks: image classification, person re-identification and reinforcement learning. The code for reproducing the experiments on these three tasks can be found in `mixstyle-release/imcls`, `mixstyle-release/reid`, and `mixstyle-release/rl`, respectively.
+
+To cite MixStyle in your publications, please use the following bibtex entry
+
+```
+@inproceedings{zhou2021mixstyle,
+  title={Domain Generalization with MixStyle},
+  author={Zhou, Kaiyang and Yang, Yongxin and Qiao, Yu and Xiang, Tao},
+  booktitle={ICLR},
+  year={2021}
+}
+```
