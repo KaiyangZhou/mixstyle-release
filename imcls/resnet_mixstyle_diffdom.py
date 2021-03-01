@@ -244,3 +244,35 @@ def resnet18_mixstyle_diffdom_L234_p0d5_a0d1(pretrained=True, **kwargs):
         init_pretrained_weights(model, model_urls['resnet18'])
 
     return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_diffdom_L23_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_diffdom_L2_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
