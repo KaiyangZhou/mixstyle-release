@@ -243,3 +243,277 @@ def resnet18_mixstyle_L234_p0d5_a0d1(pretrained=True, **kwargs):
         init_pretrained_weights(model, model_urls['resnet18'])
 
     return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d2(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.2
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d3(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.3
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d4(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.4
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d5(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.5
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d6(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.6
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d5_a0d7(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.7
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+# eval p
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d1_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.1,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d2_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.2,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d3_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.3,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d4_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.4,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d6_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.6,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L234_p0d7_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
+        mixstyle_p=0.7,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+# eval L
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L2345_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x', 'conv5_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L23_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv3_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L2_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L25_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv2_x', 'conv5_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
+
+
+@BACKBONE_REGISTRY.register()
+def resnet18_mixstyle_L34_p0d5_a0d1(pretrained=True, **kwargs):
+    model = ResNet(
+        block=BasicBlock,
+        layers=[2, 2, 2, 2],
+        mixstyle_layers=['conv3_x', 'conv4_x'],
+        mixstyle_p=0.5,
+        mixstyle_alpha=0.1
+    )
+
+    if pretrained:
+        init_pretrained_weights(model, model_urls['resnet18'])
+
+    return model
