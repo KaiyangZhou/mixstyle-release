@@ -7,9 +7,9 @@ from dassl.config import get_cfg_default
 from dassl.engine import build_trainer
 
 from yacs.config import CfgNode as CN
-import mixstyle
-import resnet_mixstyle
-import resnet_mixstyle_diffdom
+import models.mixstyle
+import models.resnet_mixstyle
+import models.resnet_mixstyle2
 
 
 def print_args(args, cfg):

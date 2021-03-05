@@ -5,7 +5,7 @@ import torch.utils.model_zoo as model_zoo
 
 from dassl.modeling.backbone import BACKBONE_REGISTRY, Backbone
 
-from mixstyle import MixStyle2 as MixStyle
+from .mixstyle import MixStyle2 as MixStyle
 
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
@@ -231,43 +231,11 @@ resnet152: block=Bottleneck, layers=[3, 8, 36, 3]
 
 
 @BACKBONE_REGISTRY.register()
-def resnet18_mixstyle_diffdom_L234_p0d5_a0d1(pretrained=True, **kwargs):
+def resnet18_mixstyle2_L234_p0d5_a0d1(pretrained=True, **kwargs):
     model = ResNet(
         block=BasicBlock,
         layers=[2, 2, 2, 2],
         mixstyle_layers=['conv2_x', 'conv3_x', 'conv4_x'],
-        mixstyle_p=0.5,
-        mixstyle_alpha=0.1
-    )
-
-    if pretrained:
-        init_pretrained_weights(model, model_urls['resnet18'])
-
-    return model
-
-
-@BACKBONE_REGISTRY.register()
-def resnet18_mixstyle_diffdom_L23_p0d5_a0d1(pretrained=True, **kwargs):
-    model = ResNet(
-        block=BasicBlock,
-        layers=[2, 2, 2, 2],
-        mixstyle_layers=['conv2_x', 'conv3_x'],
-        mixstyle_p=0.5,
-        mixstyle_alpha=0.1
-    )
-
-    if pretrained:
-        init_pretrained_weights(model, model_urls['resnet18'])
-
-    return model
-
-
-@BACKBONE_REGISTRY.register()
-def resnet18_mixstyle_diffdom_L2_p0d5_a0d1(pretrained=True, **kwargs):
-    model = ResNet(
-        block=BasicBlock,
-        layers=[2, 2, 2, 2],
-        mixstyle_layers=['conv2_x'],
         mixstyle_p=0.5,
         mixstyle_alpha=0.1
     )

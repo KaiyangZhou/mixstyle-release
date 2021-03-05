@@ -4,7 +4,7 @@ import torch.utils.model_zoo as model_zoo
 
 from dassl.modeling.backbone import BACKBONE_REGISTRY, Backbone
 
-from mixstyle import MixStyle
+from .mixstyle import MixStyle
 
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',

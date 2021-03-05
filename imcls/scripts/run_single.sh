@@ -11,6 +11,8 @@ SEED=$6
 DATASET=$7
 TRAINER=$8
 
+cd ..
+
 python train.py \
 --root ${DATA} \
 --seed ${SEED} \

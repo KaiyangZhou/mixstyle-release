@@ -55,7 +55,7 @@ class MixStyle(nn.Module):
 class MixStyle2(nn.Module):
     """MixStyle (w/ domain prior).
 
-    The input contains two equal-sized mini-batches from two distinct domains.
+    The input should contain two equal-sized mini-batches from two distinct domains.
 
     Reference:
       Zhou et al. Domain Generalization with MixStyle. ICLR 2021.

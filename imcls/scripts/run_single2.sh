@@ -6,13 +6,15 @@ S1=$1
 S2=$2
 S3=$3
 T=$4
-SEED=$5
-DATASET=$6
-ND=$7
-BATCH=$8
+NET=$5
+SEED=$6
+DATASET=$7
+TRAINER=$8
 
-NET=resnet18_mixstyle_diffdom_L234_p0d5_a0d1
-TRAINER=Vanilla
+ND=2
+BATCH=128
+
+cd ..
 
 python train.py \
 --root ${DATA} \
