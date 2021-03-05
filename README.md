@@ -4,7 +4,7 @@ This repo contains the code of our ICLR'21 paper, "Domain Generalization with Mi
 
 The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
-**Updates ######################**
+**########## Updates ############**
 
 *05-03-2021*: You might also be interested in our recently released survey on domain generalization at https://arxiv.org/abs/2103.02503, which summarizes the ten-year development in domain generalization, with coverage on the history, datasets, related problems, methodologies, potential directions, and so on.
 
