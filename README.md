@@ -4,6 +4,9 @@ This repo contains the code of our ICLR'21 paper, "Domain Generalization with Mi
 
 The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
+**### Updates ###**
+*05-03-2021*: You might also be interested in our recently released survey on domain generalization at https://arxiv.org/abs/2103.02503, which summarizes the ten-year development in domain generalization, with coverage on the history, datasets, related problems, methodologies, potential directions, and so on.
+
 **A brief introduction**: The key idea of MixStyle is to probablistically mix instance-level feature statistics of training samples across source domains. This idea is mainly inspired by neural style transfer where the feature statistics of a content image are replaced by those of a style image for image style transfer. MixStyle implicitly increases the diversity of source domains and thus makes CNNs more robust to unseen domains with domain shift.
 
 MixStyle is very easy to implement. Below we show the PyTorch code of MixStyle.
