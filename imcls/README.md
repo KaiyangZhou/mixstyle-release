@@ -6,14 +6,14 @@ This code is based on [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytor
 
 ## How to run
 
+Running scripts are provided in `scripts/`.
+
 Please see `run_mixstyle.sh`.
 
-Do
+Do the following steps before running the code:
 
 - modify the `DATA` variable in `run_single.sh` and `run_single2.sh`
 - activate the `dassl` environment via `conda activate dassl`
-
-before running the code.
 
 ## How to cite
 
