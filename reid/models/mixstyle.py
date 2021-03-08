@@ -21,10 +21,14 @@ class MixStyle(nn.Module):
         self.p = p
         self.beta = torch.distributions.Beta(alpha, alpha)
         self.eps = eps
+        self.alpha = alpha
 
         print('* MixStyle params')
         print(f'- p: {p}')
         print(f'- alpha: {alpha}')
+
+    def __repr__(self):
+        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
 
     def forward(self, x):
         if not self.training:
@@ -45,7 +49,6 @@ class MixStyle(nn.Module):
         lmda = lmda.to(x.device)
 
         perm = torch.randperm(B)
-
         mu2, sig2 = mu[perm], sig[perm]
         mu_mix = mu * lmda + mu2 * (1 - lmda)
         sig_mix = sig * lmda + sig2 * (1 - lmda)
@@ -56,7 +59,7 @@ class MixStyle(nn.Module):
 class MixStyle2(nn.Module):
     """MixStyle (w/ domain prior).
 
-    The input contains two equal-sized mini-batches from two distinct domains.
+    The input should contain two equal-sized mini-batches from two distinct domains.
 
     Reference:
       Zhou et al. Domain Generalization with MixStyle. ICLR 2021.
@@ -73,10 +76,14 @@ class MixStyle2(nn.Module):
         self.p = p
         self.beta = torch.distributions.Beta(alpha, alpha)
         self.eps = eps
+        self.alpha = alpha
 
         print('* MixStyle params')
         print(f'- p: {p}')
         print(f'- alpha: {alpha}')
+
+    def __repr__(self):
+        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
 
     def forward(self, x):
         """
