@@ -21,10 +21,14 @@ class MixStyle(nn.Module):
         self.p = p
         self.beta = torch.distributions.Beta(alpha, alpha)
         self.eps = eps
+        self.alpha = alpha
 
         print('* MixStyle params')
         print(f'- p: {p}')
         print(f'- alpha: {alpha}')
+
+    def __repr__(self):
+        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
 
     def forward(self, x):
         if not self.training:
@@ -72,10 +76,14 @@ class MixStyle2(nn.Module):
         self.p = p
         self.beta = torch.distributions.Beta(alpha, alpha)
         self.eps = eps
+        self.alpha = alpha
 
         print('* MixStyle params')
         print(f'- p: {p}')
         print(f'- alpha: {alpha}')
+
+    def __repr__(self):
+        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
 
     def forward(self, x):
         """
