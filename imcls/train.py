@@ -59,8 +59,8 @@ def reset_cfg(cfg, args):
 
 
 def extend_cfg(cfg):
-    cfg.TRAINER.DDAIGMIXSTYLE = CN()
-    cfg.TRAINER.DDAIGMIXSTYLE.MODEL = copy.deepcopy(cfg.MODEL)
+    # Here you can extend the existing cfg variables by adding new ones
+    cfg.SOMENAME = CN()
 
 
 def setup_cfg(args):
@@ -91,11 +91,6 @@ def main(args):
     print('** System info **\n{}\n'.format(collect_env_info()))
 
     trainer = build_trainer(cfg)
-
-    # Uncomment the following lines to do extract embedding features
-    #print('Running vis()')
-    #trainer.vis()
-    #return
 
     if args.eval_only:
         trainer.load_model(args.model_dir, epoch=args.load_epoch)
