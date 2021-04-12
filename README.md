@@ -6,6 +6,8 @@ The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
 **########## Updates ############**
 
+*12-04-2021*: `MixStyle` has been included in [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytorch). See [the code](https://github.com/KaiyangZhou/Dassl.pytorch/blob/master/dassl/modeling/backbone/resnet.py#L280) for details.
+
 *05-03-2021*: You might also be interested in our recently released survey on domain generalization at https://arxiv.org/abs/2103.02503, which summarizes the ten-year development in domain generalization, with coverage on the history, datasets, related problems, methodologies, potential directions, and so on.
 
 **##############################**
