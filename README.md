@@ -28,7 +28,7 @@ Note that `MixStyle` has been included in [Dassl.pytorch](https://github.com/Kai
 
 **##############################**
 
-**A brief introduction**: The key idea of MixStyle is to probablistically mix instance-level feature statistics of training samples across source domains. This idea is mainly inspired by neural style transfer where the feature statistics of a content image are replaced by those of a style image for image style transfer. MixStyle implicitly increases the diversity of source domains and thus makes CNNs more robust to unseen domains with domain shift.
+**A brief introduction**: The key idea of MixStyle is to probablistically mix instance-level feature statistics of training samples across source domains. MixStyle improves model robustness to domain shift by implicitly synthesizing new domains at the feature level for regularizing the training of convolutional neural networks. This idea is largely inspired by [neural style transfer](https://arxiv.org/abs/1703.06868) which has shown that feature statistics are closely related to image style and therefore arbitrary image style transfer can be achieved by switching the feature statistics between a content and a style image.
 
 MixStyle is very easy to implement. Below we show the PyTorch code of MixStyle.
 
@@ -45,7 +45,7 @@ class MixStyle(nn.Module):
       Zhou et al. Domain Generalization with MixStyle. ICLR 2021.
     """
 
-    def __init__(self, p=0.5, alpha=0.3, eps=1e-6):
+    def __init__(self, p=0.5, alpha=0.1, eps=1e-6):
         """
         Args:
           p (float): probability of using MixStyle.
@@ -58,15 +58,16 @@ class MixStyle(nn.Module):
         self.eps = eps
         self.alpha = alpha
 
-        print('* MixStyle params')
-        print(f'- p: {p}')
-        print(f'- alpha: {alpha}')
+        self._activated = True
 
     def __repr__(self):
         return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
 
+    def set_activation_status(self, status=True):
+        self._activated = status
+
     def forward(self, x):
-        if not self.training:
+        if not self.training or not self._activated:
             return x
 
         if random.random() > self.p:
@@ -78,25 +79,24 @@ class MixStyle(nn.Module):
         var = x.var(dim=[2, 3], keepdim=True)
         sig = (var + self.eps).sqrt()
         mu, sig = mu.detach(), sig.detach()
-        x_normed = (x - mu) / sig
+        x_normed = (x-mu) / sig
 
         lmda = self.beta.sample((B, 1, 1, 1))
         lmda = lmda.to(x.device)
 
         perm = torch.randperm(B)
-
         mu2, sig2 = mu[perm], sig[perm]
-        mu_mix = mu * lmda + mu2 * (1 - lmda)
-        sig_mix = sig * lmda + sig2 * (1 - lmda)
+        mu_mix = mu*lmda + mu2 * (1-lmda)
+        sig_mix = sig*lmda + sig2 * (1-lmda)
 
-        return x_normed * sig_mix + mu_mix
+        return x_normed*sig_mix + mu_mix
 ```
 
-How to apply MixStyle to your CNN models? Say you are using ResNet as the CNN architecture, and want to apply MixStyle after the 1st and 2nd residual blocks, you can first initialize the MixStyle module using
+How to apply MixStyle to your CNN models? Say you are using ResNet as the CNN architecture, and want to apply MixStyle after the 1st and 2nd residual blocks, you can first instantiate the MixStyle module using
 ```python
 self.mixstyle = MixStyle(p=0.5, alpha=0.1)
 ```
-and then apply MixStyle in the forward pass like
+during network construction (in `__init__()`), and then apply MixStyle in the forward pass like
 ```python
 def forward(self, x):
     x = self.conv1(x) # 1st convolution layer
@@ -109,7 +109,14 @@ def forward(self, x):
     ...
 ```
 
-In our paper, we have demonstrated the effectiveness of MixStyle on three tasks: image classification, person re-identification and reinforcement learning. The code for reproducing the experiments on these three tasks can be found in `mixstyle-release/imcls`, `mixstyle-release/reid`, and `mixstyle-release/rl`, respectively.
+In our paper, we have demonstrated the effectiveness of MixStyle on three tasks: image classification, person re-identification, and reinforcement learning. The source code for reproducing all experiments can be found in `mixstyle-release/imcls`, `mixstyle-release/reid`, and `mixstyle-release/rl`, respectively.
+
+*Takeaways* on applying MixStyle to your tasks:
+- Applying MixStyle to multiple lower layers is generally better
+- Do not apply MixStyle to the last layer that is the closest to the prediction layer
+- Different tasks might favor different combinations
+
+For more analytical studies, please read our paper at https://openreview.net/forum?id=6xHJ37MVxxp.
 
 To cite MixStyle in your publications, please use the following bibtex entry
 
