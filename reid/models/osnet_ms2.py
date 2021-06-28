@@ -4,7 +4,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .mixstyle import MixStyle2 as MixStyle
+from .mixstyle import MixStyle
 
 __all__ = [
     'osnet_x1_0', 'osnet_x0_75', 'osnet_x0_5', 'osnet_x0_25', 'osnet_ibn_x1_0'
@@ -346,7 +346,7 @@ class OSNet(nn.Module):
 
         self.mixstyle = None
         if mixstyle_layers:
-            self.mixstyle = MixStyle(p=mixstyle_p, alpha=mixstyle_alpha)
+            self.mixstyle = MixStyle(p=mixstyle_p, alpha=mixstyle_alpha, mix='crossdomain')
             print('Insert MixStyle after the following layers: {}'.format(mixstyle_layers))
         self.mixstyle_layers = mixstyle_layers
 

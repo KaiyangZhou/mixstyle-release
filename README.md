@@ -6,6 +6,8 @@ The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
 **########## Updates ############**
 
+*28-06-2021*: A new implementation of MixStyle is out, which merges `MixStyle2` to `MixStyle` and switches between random and cross-domain mixing using `self.mix`. The new features can be found [here](https://github.com/KaiyangZhou/Dassl.pytorch/issues/23).
+
 *12-04-2021*: A variable `self._activated` is added to MixStyle to better control the computational flow. To deactivate MixStyle without modifying the model code, one can do
 ```python
 def deactivate_mixstyle(m):
@@ -30,7 +32,7 @@ Note that `MixStyle` has been included in [Dassl.pytorch](https://github.com/Kai
 
 **A brief introduction**: The key idea of MixStyle is to probablistically mix instance-level feature statistics of training samples across source domains. MixStyle improves model robustness to domain shift by implicitly synthesizing new domains at the feature level for regularizing the training of convolutional neural networks. This idea is largely inspired by [neural style transfer](https://arxiv.org/abs/1703.06868) which has shown that feature statistics are closely related to image style and therefore arbitrary image style transfer can be achieved by switching the feature statistics between a content and a style image.
 
-MixStyle is very easy to implement. Below we show the PyTorch code of MixStyle.
+MixStyle is very easy to implement. Below we show a brief implementation of it in PyTorch. The full code can be found [here](https://github.com/KaiyangZhou/Dassl.pytorch/blob/master/dassl/modeling/ops/mixstyle.py).
 
 ```python
 import random
@@ -40,31 +42,34 @@ import torch.nn as nn
 
 class MixStyle(nn.Module):
     """MixStyle.
-
     Reference:
       Zhou et al. Domain Generalization with MixStyle. ICLR 2021.
     """
 
-    def __init__(self, p=0.5, alpha=0.1, eps=1e-6):
+    def __init__(self, p=0.5, alpha=0.1, eps=1e-6, mix='random'):
         """
         Args:
           p (float): probability of using MixStyle.
           alpha (float): parameter of the Beta distribution.
           eps (float): scaling parameter to avoid numerical issues.
+          mix (str): how to mix.
         """
         super().__init__()
         self.p = p
         self.beta = torch.distributions.Beta(alpha, alpha)
         self.eps = eps
         self.alpha = alpha
-
+        self.mix = mix
         self._activated = True
 
     def __repr__(self):
-        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps})'
+        return f'MixStyle(p={self.p}, alpha={self.alpha}, eps={self.eps}, mix={self.mix})'
 
     def set_activation_status(self, status=True):
         self._activated = status
+
+    def update_mix_method(self, mix='random'):
+        self.mix = mix
 
     def forward(self, x):
         if not self.training or not self._activated:
@@ -84,7 +89,21 @@ class MixStyle(nn.Module):
         lmda = self.beta.sample((B, 1, 1, 1))
         lmda = lmda.to(x.device)
 
-        perm = torch.randperm(B)
+        if self.mix == 'random':
+            # random shuffle
+            perm = torch.randperm(B)
+
+        elif self.mix == 'crossdomain':
+            # split into two halves and swap the order
+            perm = torch.arange(B - 1, -1, -1) # inverse index
+            perm_b, perm_a = perm.chunk(2)
+            perm_b = perm_b[torch.randperm(B // 2)]
+            perm_a = perm_a[torch.randperm(B // 2)]
+            perm = torch.cat([perm_b, perm_a], 0)
+
+        else:
+            raise NotImplementedError
+
         mu2, sig2 = mu[perm], sig[perm]
         mu_mix = mu*lmda + mu2 * (1-lmda)
         sig_mix = sig*lmda + sig2 * (1-lmda)

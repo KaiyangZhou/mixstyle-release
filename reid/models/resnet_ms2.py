@@ -5,7 +5,7 @@ from __future__ import division, absolute_import
 import torch.utils.model_zoo as model_zoo
 from torch import nn
 
-from .mixstyle import MixStyle2 as MixStyle
+from .mixstyle import MixStyle
 
 __all__ = [
     'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152',
@@ -249,7 +249,7 @@ class ResNet(nn.Module):
 
         self.mixstyle = None
         if mixstyle_layers:
-            self.mixstyle = MixStyle(p=mixstyle_p, alpha=mixstyle_alpha)
+            self.mixstyle = MixStyle(p=mixstyle_p, alpha=mixstyle_alpha, mix='crossdomain')
             print('Insert MixStyle after the following layers: {}'.format(mixstyle_layers))
         self.mixstyle_layers = mixstyle_layers
 

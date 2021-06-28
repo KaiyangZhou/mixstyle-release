@@ -7,9 +7,7 @@ from dassl.config import get_cfg_default
 from dassl.engine import build_trainer
 
 from yacs.config import CfgNode as CN
-import models.mixstyle
-import models.resnet_mixstyle
-import models.resnet_mixstyle2
+import trainers.vanilla2
 
 
 def print_args(args, cfg):
@@ -60,7 +58,8 @@ def reset_cfg(cfg, args):
 
 def extend_cfg(cfg):
     # Here you can extend the existing cfg variables by adding new ones
-    cfg.SOMENAME = CN()
+    cfg.TRAINER.VANILLA2 = CN()
+    cfg.TRAINER.VANILLA2.MIX = 'random'
 
 
 def setup_cfg(args):

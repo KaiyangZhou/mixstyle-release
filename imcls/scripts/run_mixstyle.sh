@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# MixStyle w/ random shuffle
-bash run_batch.sh 1 5 resnet18_mixstyle_L234_p0d5_a0d1 Vanilla
+# PACS | MixStyle w/ random mixing
+bash dg.sh pacs resnet18_ms_l123 random
 
-# MixStyle w/ domain label
-bash run_batch2.sh 1 5 resnet18_mixstyle2_L234_p0d5_a0d1 Vanilla
+# PACS | MixStyle w/ cross-domain mixing
+bash dg.sh pacs resnet18_ms_l123 crossdomain
+
+# OfficeHome | MixStyle w/ random mixing
+bash dg.sh office_home_dg resnet18_ms_l12 random
+
+# OfficeHome | MixStyle w/ cross-domain mixing
+bash dg.sh office_home_dg resnet18_ms_l12 crossdomain

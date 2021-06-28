@@ -12,7 +12,7 @@ Please see `run_mixstyle.sh`.
 
 Do the following steps before running the code:
 
-- modify the `DATA` variable in `run_single.sh` and `run_single2.sh`
+- modify `DATA` and `DASSL` in `dg.sh` based on the paths on your computer
 - activate the `dassl` environment via `conda activate dassl`
 
 ## How to cite
