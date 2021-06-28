@@ -10,6 +10,7 @@ Please follow the steps below before running the script
 
 - modify `DATA` and `DASSL` in `dg.sh` based on the paths on your computer
 - activate the `dassl` environment via `conda activate dassl`
+- `cd` to `scripts/`
 
 
 ```bash
