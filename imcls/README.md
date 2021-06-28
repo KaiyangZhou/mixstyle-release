@@ -6,14 +6,26 @@ This code is based on [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytor
 
 ## How to run
 
-Running scripts are provided in `scripts/`.
-
-Please see `run_mixstyle.sh`.
-
-Do the following steps before running the code:
+Please follow the steps below before running the script
 
 - modify `DATA` and `DASSL` in `dg.sh` based on the paths on your computer
 - activate the `dassl` environment via `conda activate dassl`
+
+
+```bash
+# PACS | MixStyle w/ random mixing
+bash dg.sh pacs resnet18_ms_l123 random
+
+# PACS | MixStyle w/ cross-domain mixing
+bash dg.sh pacs resnet18_ms_l123 crossdomain
+
+# OfficeHome | MixStyle w/ random mixing
+bash dg.sh office_home_dg resnet18_ms_l12 random
+
+# OfficeHome | MixStyle w/ cross-domain mixing
+bash dg.sh office_home_dg resnet18_ms_l12 crossdomain
+```
+
 
 ## How to cite
 
