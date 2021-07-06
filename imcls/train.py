@@ -6,8 +6,13 @@ from dassl.utils import setup_logger, set_random_seed, collect_env_info
 from dassl.config import get_cfg_default
 from dassl.engine import build_trainer
 
+# custom
 from yacs.config import CfgNode as CN
+import datasets.ssdg_pacs
+import datasets.ssdg_officehome
+import datasets.msda_pacs
 import trainers.vanilla2
+import trainers.semimixstyle
 
 
 def print_args(args, cfg):
@@ -59,8 +64,14 @@ def reset_cfg(cfg, args):
 def extend_cfg(cfg):
     # Here you can extend the existing cfg variables by adding new ones
     cfg.TRAINER.VANILLA2 = CN()
-    cfg.TRAINER.VANILLA2.MIX = 'random'
+    cfg.TRAINER.VANILLA2.MIX = 'random' # random or crossdomain
 
+    cfg.TRAINER.SEMIMIXSTYLE = CN()
+    cfg.TRAINER.SEMIMIXSTYLE.WEIGHT_U = 1. # weight on the unlabeled loss
+    cfg.TRAINER.SEMIMIXSTYLE.CONF_THRE = 0.95 # confidence threshold
+    cfg.TRAINER.SEMIMIXSTYLE.STRONG_TRANSFORMS = ()
+    cfg.TRAINER.SEMIMIXSTYLE.MS_LABELED = False # apply mixstyle to labeled data
+    cfg.TRAINER.SEMIMIXSTYLE.MIX = 'random' # random or crossdomain
 
 def setup_cfg(args):
     cfg = get_cfg_default()
@@ -90,6 +101,11 @@ def main(args):
     print('** System info **\n{}\n'.format(collect_env_info()))
 
     trainer = build_trainer(cfg)
+
+    if args.vis:
+        trainer.load_model(args.model_dir, epoch=args.load_epoch)
+        trainer.vis()
+        return
 
     if args.eval_only:
         trainer.load_model(args.model_dir, epoch=args.load_epoch)
@@ -166,6 +182,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--no-train', action='store_true', help='do not call trainer.train()'
     )
+    parser.add_argument('--vis', action='store_true', help='visualization')
     parser.add_argument(
         'opts',
         default=None,

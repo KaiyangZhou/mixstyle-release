@@ -6,6 +6,8 @@ The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
 **########## Updates ############**
 
+*06-07-2021*: Extension of our ICLR'21 paper is out: [MixStyle Neural Networks for Domain Generalization and Adaptation](https://arxiv.org/abs/2107.02053). This work extends the conference version mainly in the following ways: 1) A simple algorithmic extension enabling MixStyle to cope with unlabeled data; 2) New evidence showing that MixStyle works exceptionally well with extremely limited labels; 3) New experiments covering semi-supervised domain generalization and unsupervised domain adaptation. Code for reproducing the new experiments is available at `imcls/`.
+
 *28-06-2021*: A new implementation of MixStyle is out, which merges `MixStyle2` to `MixStyle` and switches between random and cross-domain mixing using `self.mix`. The new features can be found [here](https://github.com/KaiyangZhou/Dassl.pytorch/issues/23).
 
 *12-04-2021*: A variable `self._activated` is added to MixStyle to better control the computational flow. To deactivate MixStyle without modifying the model code, one can do
@@ -144,6 +146,13 @@ To cite MixStyle in your publications, please use the following bibtex entry
   title={Domain Generalization with MixStyle},
   author={Zhou, Kaiyang and Yang, Yongxin and Qiao, Yu and Xiang, Tao},
   booktitle={ICLR},
+  year={2021}
+}
+
+@article{zhou2021mixstylenn,
+  title={MixStyle Neural Networks for Domain Generalization and Adaptation},
+  author={Zhou, Kaiyang and Yang, Yongxin and Qiao, Yu and Xiang, Tao},
+  journal={arXiv:2107.02053},
   year={2021}
 }
 ```

@@ -3,19 +3,18 @@
 cd ..
 
 DATA=~/kaiyang/data
-DASSL=~/kaiyang/code/Dassl.pytorch
+SSDG=~/kaiyang/code/ssdg-benchmark
 
 DATASET=$1
-TRAINER=Vanilla2
+TRAINER=Vanilla2 # use labeled source data only
 NET=$2 # e.g. resnet18_ms_l123, resnet18_ms_l12
-MIX=$3
 
-if [ ${DATASET} == pacs ]; then
+if [ ${DATASET} == ssdg_pacs ]; then
     D1=art_painting
     D2=cartoon
     D3=photo
     D4=sketch
-elif [ ${DATASET} == office_home_dg ]; then
+elif [ ${DATASET} == ssdg_officehome ]; then
     D1=art
     D2=clipart
     D3=product
@@ -54,9 +53,9 @@ do
         --trainer ${TRAINER} \
         --source-domains ${S1} ${S2} ${S3} \
         --target-domains ${T} \
-        --dataset-config-file ${DASSL}/configs/datasets/dg/${DATASET}.yaml \
-        --config-file configs/trainers/mixstyle/${DATASET}_${MIX}.yaml \
-        --output-dir output/${DATASET}/${TRAINER}/${NET}/${MIX}/${T}/seed${SEED} \
-        MODEL.BACKBONE.NAME ${NET}
+        --dataset-config-file configs/datasets/${DATASET}.yaml \
+        --config-file configs/trainers/mixstyle/${DATASET}.yaml \
+        --output-dir output/${DATASET}/${TRAINER}/${NET}/${T}/seed${SEED} \
+        MODEL.BACKBONE.NAME ${NET} \
     done
 done

@@ -18,9 +18,11 @@ class Vanilla2(TrainerX):
 
         if mix == 'random':
             self.model.apply(random_mixstyle)
+            print('MixStyle: random mixing')
 
         elif mix == 'crossdomain':
             self.model.apply(crossdomain_mixstyle)
+            print('MixStyle: cross-domain mixing')
 
         else:
             raise NotImplementedError
@@ -47,3 +49,49 @@ class Vanilla2(TrainerX):
         input = input.to(self.device)
         label = label.to(self.device)
         return input, label
+    
+    @torch.no_grad()
+    def vis(self):
+        self.set_model_mode('eval')
+        output_dir = self.cfg.OUTPUT_DIR
+        source_domains = self.cfg.DATASET.SOURCE_DOMAINS
+        print('Source domains:', source_domains)
+
+        out_embed = []
+        out_domain = []
+        out_label = []
+
+        split = self.cfg.TEST.SPLIT
+        data_loader = self.val_loader if split == 'val' else self.test_loader
+
+        print('Extracting style features')
+
+        for batch_idx, batch in enumerate(data_loader):
+            input = batch['img'].to(self.device)
+            label = batch['label']
+            domain = batch['domain']
+            impath = batch['impath']
+
+            # model should directly output features or style statistics
+            raise NotImplementedError
+            output = self.model(input)
+            output = output.cpu().numpy()
+            out_embed.append(output)
+            out_domain.append(domain.numpy())
+            out_label.append(label.numpy()) # CLASS LABEL
+
+            print('processed batch-{}'.format(batch_idx + 1))
+
+        out_embed = np.concatenate(out_embed, axis=0)
+        out_domain = np.concatenate(out_domain, axis=0)
+        out_label = np.concatenate(out_label, axis=0)
+        print('shape of feature matrix:', out_embed.shape)
+        out = {
+            'embed': out_embed,
+            'domain': out_domain,
+            'dnames': source_domains,
+            'label': out_label
+        }
+        out_path = osp.join(output_dir, 'embed.pt')
+        torch.save(out, out_path)
+        print('File saved to "{}"'.format(out_path))

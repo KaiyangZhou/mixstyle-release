@@ -12,3 +12,7 @@ OPTIM:
   LR: 0.001
   MAX_EPOCH: 150
   LR_SCHEDULER: 'cosine'
+
+TRAINER:
+  VANILLA2:
+    MIX: 'crossdomain'

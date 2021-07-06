@@ -1,0 +1,30 @@
+DATALOADER:
+  TRAIN_X:
+    BATCH_SIZE: 32
+  TEST:
+    BATCH_SIZE: 100
+
+OPTIM:
+  NAME: 'sgd'
+  LR: 0.001
+  MAX_EPOCH: 10
+  LR_SCHEDULER: 'single_step'
+
+TRAIN:
+  COUNT_ITER: 'train_x'
+  PRINT_FREQ: 50
+
+MODEL:
+  BACKBONE:
+    NAME: 'resnet101'
+  HEAD:
+    NAME: 'mlp'
+    HIDDEN_LAYERS: [1024, 1024]
+    ACTIVATION: 'relu'
+    BN: True
+    DROPOUT: 0.5
+
+TRAINER:
+  SEMIMIXSTYLE:
+    STRONG_TRANSFORMS: ['random_flip', 'center_crop', 'randaugment_fixmatch', 'normalize', 'cutout']
+    MIX: 'crossdomain'

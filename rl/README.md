@@ -101,4 +101,11 @@ If you find this code useful to your research, please cite the following papers.
   booktitle={ICLR},
   year={2021}
 }
+
+@article{zhou2021mixstylenn,
+  title={MixStyle Neural Networks for Domain Generalization and Adaptation},
+  author={Zhou, Kaiyang and Yang, Yongxin and Qiao, Yu and Xiang, Tao},
+  journal={arXiv:2107.02053},
+  year={2021}
+}
 ```
