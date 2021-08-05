@@ -65,6 +65,11 @@ class SSDGPACS(DatasetBase):
     
     @staticmethod
     def read_json_train(filepath, src_domains, image_dir):
+        """
+        The latest office_home_dg dataset's class folders have
+        been changed to only contain the class names, e.g.,
+        000_Alarm_Clock/ is changed to Alarm_Clock/.
+        """
 
         def _convert_to_datums(items):
             out = []
@@ -72,8 +77,14 @@ class SSDGPACS(DatasetBase):
                 if dname not in src_domains:
                     continue
                 domain = src_domains.index(dname)
-                impath = osp.join(image_dir, impath)
-                item = Datum(impath=impath, label=int(label), domain=domain)
+                impath2 = osp.join(image_dir, impath)
+                if not osp.exists(impath2):
+                    impath = impath.split('/')
+                    if impath[-2].startswith('0'):
+                        impath[-2] = impath[-2][4:]
+                    impath = '/'.join(impath)
+                    impath2 = osp.join(image_dir, impath)
+                item = Datum(impath=impath2, label=int(label), domain=domain)
                 out.append(item)
             return out
         
