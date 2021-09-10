@@ -42,7 +42,7 @@ bash ssdg2.sh ssdg_pacs resnet18_ms_l123
 bash ssdg1.sh ssdg_officehome resnet18_ms_l12
 
 # OfficeHome | MixStyle w/ labeled + unlabeled source data
-bash ssdg2.sh ssdg_officehome resnet18_ms_l123
+bash ssdg2.sh ssdg_officehome resnet18_ms_l12
 ```
 
 ### Unsupervised Domain Adaptation
