@@ -133,7 +133,7 @@ def forward(self, x):
 In our paper, we have demonstrated the effectiveness of MixStyle on three tasks: image classification, person re-identification, and reinforcement learning. The source code for reproducing all experiments can be found in `mixstyle-release/imcls`, `mixstyle-release/reid`, and `mixstyle-release/rl`, respectively.
 
 *Takeaways* on applying MixStyle to your tasks:
-- Applying MixStyle to multiple lower layers is generally better
+- Applying MixStyle to multiple lower layers is generally better (like `res1` and `res2` in ResNet)
 - Do not apply MixStyle to the last layer that is the closest to the prediction layer
 - Different tasks might favor different combinations
 
