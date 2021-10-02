@@ -1,3 +1,4 @@
+import torch
 from torch.nn import functional as F
 
 from dassl.engine import TRAINER_REGISTRY, TrainerX
