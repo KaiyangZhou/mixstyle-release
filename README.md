@@ -140,6 +140,8 @@ In our paper, we have demonstrated the effectiveness of MixStyle on three tasks:
 
 For more analytical studies, please read our paper at https://openreview.net/forum?id=6xHJ37MVxxp.
 
+Please also read the extended paper at https://arxiv.org/abs/2107.02053 for a more comprenehsive picture of MixStyle.
+
 To cite MixStyle in your publications, please use the following bibtex entry
 
 ```
