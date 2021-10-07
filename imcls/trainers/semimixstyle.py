@@ -42,12 +42,14 @@ class SemiMixStyle(TrainerXU):
         choices = cfg.TRAINER.SEMIMIXSTYLE.STRONG_TRANSFORMS
         tfm_train_strong = build_transform(cfg, is_train=True, choices=choices)
         custom_tfm_train += [tfm_train_strong]
-        self.dm = DataManager(self.cfg, custom_tfm_train=custom_tfm_train)
-        self.train_loader_x = self.dm.train_loader_x
-        self.train_loader_u = self.dm.train_loader_u
-        self.val_loader = self.dm.val_loader
-        self.test_loader = self.dm.test_loader
-        self.num_classes = self.dm.num_classes
+        dm = DataManager(self.cfg, custom_tfm_train=custom_tfm_train)
+        self.train_loader_x = dm.train_loader_x
+        self.train_loader_u = dm.train_loader_u
+        self.val_loader = dm.val_loader
+        self.test_loader = dm.test_loader
+        self.num_classes = dm.num_classes
+        self.num_source_domains = dm.num_source_domains
+        self.lab2cname = dm.lab2cname
 
     def assess_y_pred_quality(self, y_pred, y_true, mask):
         n_masked_correct = (y_pred.eq(y_true).float() * mask).sum()
