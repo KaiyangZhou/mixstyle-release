@@ -6,7 +6,7 @@ The OpenReview link is https://openreview.net/forum?id=6xHJ37MVxxp.
 
 **########## Updates ############**
 
-*12-10-2021*: Please note that the latest version for Dassl is `v0.5.0` where some changes might affect the performance. See [this](https://github.com/KaiyangZhou/Dassl.pytorch#whats-new) for more details.
+*12-10-2021*: Please note that the latest version for Dassl is `v0.5.0` (the changes might affect the performance if the original images are not square). See [this](https://github.com/KaiyangZhou/Dassl.pytorch#whats-new) for more details.
 
 *06-07-2021*: Extension of our ICLR'21 paper is out: [MixStyle Neural Networks for Domain Generalization and Adaptation](https://arxiv.org/abs/2107.02053). This work extends the conference version mainly in the following ways: 1) A simple algorithmic extension enabling MixStyle to cope with unlabeled data; 2) New evidence showing that MixStyle works exceptionally well with extremely limited labels; 3) New experiments covering semi-supervised domain generalization and unsupervised domain adaptation. Code for reproducing the new experiments is available at `imcls/`.
 
