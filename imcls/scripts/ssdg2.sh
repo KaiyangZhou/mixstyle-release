@@ -56,6 +56,6 @@ do
         --dataset-config-file configs/datasets/${DATASET}.yaml \
         --config-file configs/trainers/semimixstyle/${DATASET}.yaml \
         --output-dir output/${DATASET}/${TRAINER}/${NET}/${T}/seed${SEED} \
-        MODEL.BACKBONE.NAME ${NET} \
+        MODEL.BACKBONE.NAME ${NET}
     done
 done
